@@ -134,7 +134,7 @@ TARGET_USES_AOSP := true
 
 TARGET_USES_INTERACTION_BOOST := true
 
-TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
+#TARGET_RECOVERY_UI_LIB := librecovery_ui_nanohub
 
 
 # Wifi related defines
