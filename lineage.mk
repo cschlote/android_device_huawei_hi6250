@@ -22,7 +22,7 @@ $(call inherit-product, device/huawei/hi6250/device.mk)
 
 # Device identifier
 PRODUCT_DEVICE := hi6250
-PRODUCT_NAME := cm_hi6250
+PRODUCT_NAME := lineage_hi6250
 PRODUCT_BRAND := huawei
 PRODUCT_MODEL := hi6250
 PRODUCT_MANUFACTURER := huawei
