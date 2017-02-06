@@ -29,7 +29,7 @@ allow hwcamcfgsvr mediaserver:binder { transfer };
 allow hwcamcfgsvr mediaserver:fd { use };
 allow hwcamcfgsvr camera_data_file:dir rw_dir_perms;
 allow hwcamcfgsvr camera_data_file:file { setattr rw_file_perms };
-allow hwcamcfgsvr default_android_service:service_manager { add find };
+#allow hwcamcfgsvr default_android_service:service_manager { add find };
 allow hwcamcfgsvr surfaceflinger:fd { use };
 allow hwcamcfgsvr dmd_device:chr_file rw_file_perms;
 allow hwcamcfgsvr sensorservice_service:service_manager { find };

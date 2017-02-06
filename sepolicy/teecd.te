@@ -40,4 +40,4 @@ allow tee fingerprintd:file r_file_perms;
 allow tee hisi_log:dir { setattr rw_dir_perms };
 allow tee hisi_log:file { setattr rw_file_perms };
 allow tee unlabeled:dir { search };
-allow tee default_prop:property_service { set };
+#allow tee default_prop:property_service { set };
