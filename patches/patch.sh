@@ -12,7 +12,7 @@ if [[ "$CLEAR" == "" ]]; then
 	./clearpatches.sh $ROM
 fi
 
-cd $ROM
+cd $THISDIR/$ROM
 for LINE in $(find -name *.patch | sort )
 do
 
@@ -66,7 +66,7 @@ do
 	cd $THISDIR
 done
 
-cd $ROM
+cd $THISDIR/$ROM
 for LINE in $(find -name *.apply | sort )
 do
 	PATCH=$THISDIR/$ROM/$LINE
