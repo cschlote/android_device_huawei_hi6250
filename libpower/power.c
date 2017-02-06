@@ -39,7 +39,7 @@
 
 static int low_power = 0;
 static int dt2w = 0;
-static struct power_profile * profile = &performance; 
+static struct power_profile * profile = &performance;
 
 static void write_string(char * path, char * value) {
     int fd = open(path, O_WRONLY);
@@ -59,7 +59,7 @@ static void power_init(struct power_module *module)
 {
 
     DEBUG_LOG("init");
- 
+
     write_string(CPU0_FREQ_MAX_PATH,(* profile).cpu0_freq_max);
     write_string(CPU0_FREQ_MIN_PATH,(* profile).cpu0_freq_low);
     write_string(GPU_FREQ_MIN_PATH,(* profile).gpu_freq_low);
@@ -96,10 +96,10 @@ static void power_hint_cpu_boost(int dur) {
 
     if(!dur)
 	dur = (* profile).cpu0_boost_p_dur_def;
-	
+
     sprintf(sdur, "%d\n", dur);
-    write_string(CPU0_BOOST_P_DUR_PATH,sdur); 
-    write_string(CPU0_BOOST_PULSE_PATH,"1\n"); 
+    write_string(CPU0_BOOST_P_DUR_PATH,sdur);
+    write_string(CPU0_BOOST_PULSE_PATH,"1\n");
 }
 
 static void power_hint_interactive(int on) {
@@ -222,14 +222,14 @@ static void power_hint(struct power_module *module, power_hint_t hint,
 		if(!low_power)
 		    power_hint_interactive(0);
 		break;
-	case POWER_HINT_AUDIO:
-		DEBUG_LOG("POWER_HINT_AUDIO %d", var);
-		ALOGI("Meticulus: POWER_HINT_AUDIO is used! Implement!");
-		break;
+//	case POWER_HINT_AUDIO:
+//		DEBUG_LOG("POWER_HINT_AUDIO %d", var);
+//		ALOGI("Meticulus: POWER_HINT_AUDIO is used! Implement!");
+//		break;
 	case POWER_HINT_SET_PROFILE:
 		if(data != NULL)
 		    var = *(int *) data;
-		DEBUG_LOG("POWER_HINT_PROFILE %d", var);	
+		DEBUG_LOG("POWER_HINT_PROFILE %d", var);
                 power_hint_set_profile(module,var);
 		break;
         default:
@@ -242,7 +242,7 @@ static void set_dt2w(int on) {
     dt2w = on;
     if(on)
 	write_string(WAKE_CONF_PATH,"1\n");
-    else 
+    else
 	write_string(WAKE_CONF_PATH,"0\n");
 }
 
@@ -264,7 +264,7 @@ static int get_feature(struct power_module *module, feature_t feature) {
 }
 
 static void set_feature(struct power_module *module, feature_t feature, int state) {
-    
+
     switch(feature) {
 	case POWER_FEATURE_DOUBLE_TAP_TO_WAKE:
 	    set_dt2w(state);
