@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  /**
-  * This class is taken from 
+  * This class is taken from
   */
 
 package com.android.internal.telephony;
@@ -203,7 +203,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
     static final int RIL_UNSOL_HW_UICC_SUBSCRIPTION_STATUS_CHANGED = 0x5e3;
     static final int RIL_UNSOL_HW_UIM_LOCKCARD = 0xbcc;
 
-    static String 
+    static String
     requestToString(int request) {
         switch (request) {
             case RIL_REQUEST_HW_SET_PCM: return "HW_SET_PCM";
@@ -211,7 +211,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
         }
     }
 
-    static String 
+    static String
     huaweiResponseToString(int request) {
         switch (request) {
             case RIL_UNSOL_HW_PLMN_SEARCH_INFO_IND: return "HW_PLMN_SEARCH_INFO_IND";
@@ -226,7 +226,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
         riljLog("[UNSL]< " + huaweiResponseToString(response) + " " + retToString(response, ret));
     }
 
-    @Override
+    //@Override
     protected RILRequest
     processSolicited (Parcel p) {
         int serial, error;
@@ -460,7 +460,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
         return rr;
     }
 
-    @Override
+    //@Override
     protected void
     processUnsolicited (Parcel p) {
         int response;
@@ -485,7 +485,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
             p.setDataPosition(dataPosition);
 
             // Forward responses that we are not overriding to the super class
-            super.processUnsolicited(p);
+            super.processUnsolicited(p,0);
             return;
         }
 
@@ -532,7 +532,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
         int lteRssnr = response[12]; // 130 to -30, -200
         int lteCqi = response[13];
         int mGsm = response[14];
-        int mRat = response[15]; // added by huawei       
+        int mRat = response[15]; // added by huawei
 
         Rlog.d(RILJ_LOG_TAG, "---------- HEX ----------");
         Rlog.d(RILJ_LOG_TAG, "gsmSignalStrength:" + String.format("%x", gsmSignalStrength));
@@ -562,7 +562,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
             else if (lteRsrp >= -140) lteSignalStrength = 64; // None or Unknown
         }
         else if (gsmSignalStrength == 0 && lteRsrp == 0) // 3G
-        {  
+        {
             lteRsrp = (mWcdmaRscp & 0xFF) - 256;
             lteRsrq = (mWcdmaEcio & 0xFF) - 256;
 
@@ -587,7 +587,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
             }
         }
         else if (mWcdmaRscp == 0 && lteRsrp == 0) // 2G
-        {         
+        {
             lteRsrp = (gsmSignalStrength & 0xFF) - 256;
 
             if (lteRsrp > -20) { // None or Unknown
@@ -634,8 +634,8 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
         Rlog.d(RILJ_LOG_TAG, "-------------------------");
 
         SignalStrength signalStrength = new SignalStrength(
-            gsmSignalStrength, gsmBitErrorRate, cdmaDbm, cdmaEcio, evdoDbm, 
-            evdoEcio, evdoSnr, lteSignalStrength, -lteRsrp, -lteRsrq, 
+            gsmSignalStrength, gsmBitErrorRate, cdmaDbm, cdmaEcio, evdoDbm,
+            evdoEcio, evdoSnr, lteSignalStrength, -lteRsrp, -lteRsrq,
             lteRssnr, lteCqi, true);
 
         return signalStrength;
@@ -737,7 +737,7 @@ public class HuaweiRIL extends RIL implements CommandsInterface {
 
     public void setModemPcm(boolean on, Message result) {
         RILRequest rr;
-        
+
         rr = RILRequest.obtain(RIL_REQUEST_HW_SET_PCM, result);
 
         rr.mParcel.writeInt(1);
