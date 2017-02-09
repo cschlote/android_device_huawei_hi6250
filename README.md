@@ -105,7 +105,7 @@ NOTE: Yes we are syncing again and No, it shouldn't take quite as long. Every ti
 
 ### Step 4: Building
 
-Now you will want to apply the repo patches. These patches modify code at other places of the ROM source to work with this device.
+Now you *must* apply the repo patches. These patches modify code at other places of the ROM source tree to work with the target device.
 Execute the following commands in a linux terminal:
 ```bash
 cd /home/$USER/lineage/device/huawei/hi6250/patches
@@ -113,7 +113,7 @@ cd /home/$USER/lineage/device/huawei/hi6250/patches
 ```
 NOTE: Now you have everything that you need to build LineageOS for your Huawei P9 Lite. Build times depend on you PC performance specifications. In the following terminal command "-j8" represents the number of concurrent tasks to execute. For low specs machines (such as mine) lowering the value to "-j3" may help speed things up. For high spec'd machines raising the value may speed things up.
 
-NOTE: It may take anywhere from 5 hours to 15 hours depending on system specs for a complete build.
+NOTE: It may take anywhere from 1 hours to 15 hours depending on system specs for a complete build.
 Execute the following commands in a linux terminal:
 ```bash
 cd /home/$USER/lineage
@@ -147,7 +147,9 @@ cd /home/$USER/lineage
 lunch lineage_hi6250-userdebug
 make -j8 recoveryimage
 ```
+Now copy the resulting recovery image to a save place, otherwise it will be overwritten by the next
+normal build.
 
 NOTE: remember to re-add the "#" before "RECOVERY_VARIANT := twrp" in the BoardConfig.mk before doing a clean build or it will fail to build!
 ### Please let me know if there are mistakes,typos, mis/outdated - information in these instructions by creating an "issue".
-NOTE: Needs to be fixed.
+
