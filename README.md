@@ -105,7 +105,7 @@ NOTE: Yes we are syncing again and No, it shouldn't take quite as long. Every ti
 
 ### Step 4: Building
 
-Now you will want to apply the repo patches. These patches modify code in the ROM to work with this device.
+Now you will want to apply the repo patches. These patches modify code at other places of the ROM source to work with this device.
 Execute the following commands in a linux terminal:
 ```bash
 cd /home/$USER/lineage/device/huawei/hi6250/patches
@@ -124,25 +124,21 @@ make -j8 bacon
 
 # Build TWRP Recovery ( optional )
 
-NOTE: Currently TWRP can only be built after a successful build of CyanogenMod 13.
+NOTE: Currently TWRP can only be built after a successful build of LineageOS 14.1
 
 ### Step 1: Setup build env for TWRP
-Clone OMNI's recovery (TWRP) into the build system.
-```bash
-cd /home/$USER/lineage
-git clone https://github.com/cschlote/android_bootable_recovery.git -b p9lrom bootable/recovery-twrp
-```
+Clone OMNI's recovery (TWRP) into the build system. This is done by the hi6250-recovery.xml snippet in your local manifests.
+
+See https://github.com/cschlote/android_bootable_recovery.git -b p9lrom for details
+
 Upstream maintainer:
 https://github.com/omnirom/android_bootable_recovery.git
 
 Open the BoardConfig.mk file and remove the comment "#" before the line "RECOVERY_VARIANT := twrp".
 Save BoardConfig.mk
 
-Re-run patch.sh to patch bootable/recovery-twrp
-```bash
-cd /home/$USER/lineage/device/huawei/hi6250/patches
-./patch.sh meticulus
-```
+All patches are part of the referenced GIT repo, so no patching needed.
+
 ### Step 2: Build TWRP
 
 ```bash
