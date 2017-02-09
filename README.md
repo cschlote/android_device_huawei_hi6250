@@ -65,6 +65,8 @@ Execute the following commands in a linux terminal:
 ```bash
 mkdir /home/$USER/lineage/.repo/local_manifests
 gedit /home/$USER/lineage/.repo/local_manifests/hi6250.xml
+gedit /home/$USER/lineage/.repo/local_manifests/hi6250-recovery.xml
+gedit /home/$USER/lineage/.repo/local_manifests/hi6250-extras.xml
 ```
 Copy the following into hi6250.xml, save and close.
 ```bash
@@ -73,28 +75,21 @@ Copy the following into hi6250.xml, save and close.
   <project name="cschlote/android_kernel_huawei_hi6250" path="kernel/huawei/hi6250" remote="github" revision="p9lrom"/>
   <project name="cschlote/android_device_huawei_hi6250" path="device/huawei/hi6250" remote="github" revision="p9lrom"/>
   <project name="cschlote/android_vendor_huawei_hi6250" path="vendor/huawei/hi6250" remote="github" revision="p9lrom"/>
-  <!--
-  <remove-project name="platform/packages/apps/Nfc"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_Nfc" path="vendor/nxp-nfc/opensource/Nfc" remote="github" revision="cm-14.1"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_libnfc-nci" path="vendor/nxp-nfc/opensource/libnfc-nci" remote="github" revision="cm-14.1"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_frameworks" path="vendor/nxp-nfc/opensource/frameworks" remote="github" revision="cm-14.1"/>
-  -->
 </manifest>
-```
 
-Alternatively, if you would like to include Meticulus Development's "extras" then copy the following into hi6250.xml, save and close.
+```
+Copy the following into hi6250-recovery.xml, save and close.
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="cschlote/android_kernel_huawei_hi6250" path="kernel/huawei/hi6250" remote="github" revision="p9lrom"/>
-  <project name="cschlote/android_device_huawei_hi6250" path="device/huawei/hi6250" remote="github" revision="p9lrom"/>
-  <project name="cschlote/android_vendor_huawei_hi6250" path="vendor/huawei/hi6250" remote="github" revision="p9lrom"/>
-  <!--
-  <remove-project name="platform/packages/apps/Nfc"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_Nfc" path="vendor/nxp-nfc/opensource/Nfc" remote="github" revision="cm-14.1"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_libnfc-nci" path="vendor/nxp-nfc/opensource/libnfc-nci" remote="github" revision="cm-14.1"/>
-  <project name="LineageOS/android_vendor_nxp-nfc_opensource_frameworks" path="vendor/nxp-nfc/opensource/frameworks" remote="github" revision="cm-14.1"/>
-  -->
+  <project name="cschlote/android_bootable_recovery" path="bootable/recovery-twrp" remote="github" revision="p9lrom"/>
+</manifest>
+```
+
+Alternatively, if you would like to include Meticulus Development's "extras" then copy the following into hi6250-extras.xml, save and close.
+```bash
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
   <project name="Meticulus/android_packages_CodinalteParts" path="packages/apps/CodinalteParts" remote="github" revision="hi6250"/>
   <project name="omnirom/android_packages_PerformanceControl" path="packages/apps/PerformanceControl" remote="github" revision="android-4.4"/>
 </manifest>
@@ -127,16 +122,18 @@ lunch lineage_hi6250-userdebug
 make -j8 bacon
 ```
 
-# Build TWRP ( optional )
+# Build TWRP Recovery ( optional )
 
 NOTE: Currently TWRP can only be built after a successful build of CyanogenMod 13.
 
 ### Step 1: Setup build env for TWRP
 Clone OMNI's recovery (TWRP) into the build system.
 ```bash
-cd /home/$USER/cm
-git clone https://github.com/omnirom/android_bootable_recovery.git -b android-6.0 bootable/recovery-twrp
+cd /home/$USER/lineage
+git clone https://github.com/cschlote/android_bootable_recovery.git -b p9lrom bootable/recovery-twrp
 ```
+Upstream maintainer:
+https://github.com/omnirom/android_bootable_recovery.git
 
 Open the BoardConfig.mk file and remove the comment "#" before the line "RECOVERY_VARIANT := twrp".
 Save BoardConfig.mk
@@ -144,7 +141,7 @@ Save BoardConfig.mk
 Re-run patch.sh to patch bootable/recovery-twrp
 ```bash
 cd /home/$USER/lineage/device/huawei/hi6250/patches
-./patch.sh
+./patch.sh meticulus
 ```
 ### Step 2: Build TWRP
 
