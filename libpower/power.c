@@ -204,24 +204,24 @@ static void power_hint(struct power_module *module, power_hint_t hint,
 		DEBUG_LOG("POWER_HINT_LOW_POWER %d", var);
 		power_hint_low_power(var);
 		break;
-	case POWER_HINT_CPU_BOOST:
-		if(data != NULL)
-		    var = *(int *) data;
-		DEBUG_LOG("POWER_HINT_CPU_BOOST %d", var);
-		if(!low_power)
-		    power_hint_cpu_boost(var);
-		break;
-	case POWER_HINT_LAUNCH_BOOST:
-		packageName = ((launch_boost_info_t *)data)->packageName;
-		pid = ((launch_boost_info_t *)data)->pid;
-
-		/* Meticulus: not quite sure what to do with this info?
-		 * Set thread prio on the app???
-		 */
-		DEBUG_LOG("POWER_HINT_LAUNCH_BOOST app=%s pid=%d", packageName,pid);
-		if(!low_power)
-		    power_hint_interactive(0);
-		break;
+//	case POWER_HINT_CPU_BOOST:
+//		if(data != NULL)
+//		    var = *(int *) data;
+//		DEBUG_LOG("POWER_HINT_CPU_BOOST %d", var);
+//		if(!low_power)
+//		    power_hint_cpu_boost(var);
+//		break;
+//	case POWER_HINT_LAUNCH_BOOST:
+//		packageName = ((launch_boost_info_t *)data)->packageName;
+//		pid = ((launch_boost_info_t *)data)->pid;
+//
+//		/* Meticulus: not quite sure what to do with this info?
+//		 * Set thread prio on the app???
+//		 */
+//		DEBUG_LOG("POWER_HINT_LAUNCH_BOOST app=%s pid=%d", packageName,pid);
+//		if(!low_power)
+//		    power_hint_interactive(0);
+//		break;
 //	case POWER_HINT_AUDIO:
 //		DEBUG_LOG("POWER_HINT_AUDIO %d", var);
 //		ALOGI("Meticulus: POWER_HINT_AUDIO is used! Implement!");
