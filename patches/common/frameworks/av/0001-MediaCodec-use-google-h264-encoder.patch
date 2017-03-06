@@ -1,7 +1,9 @@
 From f9ae067678753c753ff7dc22398e48fdc044cd22 Mon Sep 17 00:00:00 2001
 From: Meticulus <theonejohnnyd@gmail.com>
 Date: Mon, 5 Dec 2016 08:59:21 -0600
-Subject: [PATCH] 0001-MediaCodec-use-google-h264-encoder
+Subject: [PATCH] 0001-MediaCodec-use-google-h264-encoder, v2
+
+v2:Fixed up comparision.
 
 Change-Id: I120f2aae3be942471636231734de8585f495613d
 ---
@@ -35,7 +37,7 @@ index 5e0ee55..c0c870e 100644
 +     */
 +    status_t ret = -1;
 +    //ALOGD("Meticulus: mime = %s",mime);
-+    if((mime != "video/avc") && encoder && property_get_bool("persist.sys.google_avc_enc",0)) {
++    if((mime == "video/avc") && encoder && property_get_bool("persist.sys.google_avc_enc",0)) {
 +	ret = codec->init("OMX.google.h264.encoder",false,encoder);
 +	ALOGI("persist.sys.google_avc_enc is set.");
 +    }
